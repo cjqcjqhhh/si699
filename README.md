@@ -10,7 +10,7 @@ This is Junqi Chen's personal repo for SI699, recording project progress and per
 + **Group Member**: Yucheng Gu, Junqi Chen, Haoyu Huang
 + **Project Name**: Machine Learning Augmented Github Indexer (MAGI)
 + **Working Directory**:
-  + `./MAGI`: Main project directory
+  + `./MAGI`: Main project directory (not commit here, please refer to repo [MAGI](https://github.com/Enoch2090/MAGI))
   + `./Resource`: Resource used for the project
 + **Outer Links**:
   + [SI699 Project Checkin](https://docs.google.com/spreadsheets/d/1wfuejIR5RFRE0MRfVE7dChMRzhN2uVJe0ggB04gn9CM/edit#gid=0)
