@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAGI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">MAGI</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">登出 ({{ current_user.id }})</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">登录</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <!-- Title -->
+                <h1 class="mb-4">MAGI</h1>
+                <!-- Search Box and Buttons-->
+                <form action="#" method="get" class="d-inline">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="search" placeholder="请输入关键词" aria-label="Search">
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                        <button class="btn btn-secondary" type="button" onclick="alert('Feeling Lucky!')">Feeling Lucky</button>
+                    </div>
+                </form>
+                <!-- Search Result Container -->
+                <div id="search-results" class="d-none mt-4">
+                    <ul id="search-results-list" class="list-unstyled">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#search-form').on('submit', function(event) {
+                event.preventDefault();
+                var search_text = $('#search-input').val();
+                $.ajax({
+                    url: "{{ url_for('search') }}",
+                    method: 'POST',
+                    data: { search_text: search_text },
+                    success: function(response) {
+                        $('#search-results-list').empty();
+                        $.each(response, function(key, value) {
+                            var result_item = $('<li>').append(
+                                $('<h3>').append(
+                                    $('<a>', {
+                                        href: value,
+                                        text: key
+                                    })
+                                )
+                            );
+                            $('#search-results-list').append(result_item);
+                        });
+                        $('#search-results').removeClass('d-none');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
