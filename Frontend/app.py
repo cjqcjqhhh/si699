@@ -53,11 +53,26 @@ def about():
 def search():
     search_text = request.form['search_text']
     result = {
-        "项目1": "https://github.com/user1/project1",
-        "项目2": "https://github.com/user2/project2",
-        "项目3": "https://github.com/user3/project3",
-        "项目4": "https://github.com/user4/project4",
-        "项目5": "https://github.com/user5/project5"
+        "Project A": {
+            "url": "https://github.com/user/project-a",
+            "readme": "This is a sample project A. It does some interesting things and is an example for the MAGI search engine."
+        },
+        "Project B": {
+            "url": "https://github.com/user/project-b",
+            "readme": "This is a sample project B. It is another example for the MAGI search engine, demonstrating different projects."
+        },
+        "Project C": {
+            "url": "https://github.com/user/project-c",
+            "readme": "This is a sample project C."
+        },
+        "Project D": {
+            "url": "https://github.com/user/project-d",
+            "readme": "This is a sample project D."
+        },
+        "Project E": {
+            "url": "https://github.com/user/project-e",
+            "readme": "This is a sample project E."
+        }
     }
     return jsonify(result)
 

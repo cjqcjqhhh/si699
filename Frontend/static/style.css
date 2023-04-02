@@ -1,0 +1,28 @@
+/* style.css */
+/* not use for this project */
+
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    font-size: 4rem;
+    color: #007BFF;
+    margin-bottom: 30px;
+}
+
+.container {
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+#search-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+#search-input {
+    flex-grow: 1;
+    margin-right: 1rem;
+}

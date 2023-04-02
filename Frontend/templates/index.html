@@ -8,12 +8,17 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
 </head>
 <body class="bg-light">
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/">MAGI</a>
-            <div class="collapse navbar-collapse">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
@@ -37,22 +42,19 @@
         </div>
     </nav>
 
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <!-- Title -->
-                <h1 class="mb-4">MAGI</h1>
-                <!-- Search Box and Buttons-->
-                <form action="#" method="get" class="d-inline">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="search" placeholder="请输入关键词" aria-label="Search">
-                    </div>
-                    <div class="mb-3">
-                        <button class="btn btn-primary" type="submit">Search</button>
-                        <button class="btn btn-secondary" type="button" onclick="alert('Feeling Lucky!')">Feeling Lucky</button>
+    <div class="container text-center">
+        <h1 class="mt-5 display-1">MAGI</h1>
+        <p class="fs-5 fst-italic text-muted">MAGI is a semantic searcher that allows you to search over GitHub with natural language.</p>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form id="search-form" class="mt-5">
+                    <input type="text" id="search-input" class="form-control mb-3" placeholder="搜索" required>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" id="search-btn" class="btn btn-primary">Search</button>
+                        <button type="button" id="lucky-btn" class="btn btn-secondary">Feeling Lucky</button>
                     </div>
                 </form>
-                <!-- Search Result Container -->
+                <!-- Result List Container -->
                 <div id="search-results" class="d-none mt-4">
                     <ul id="search-results-list" class="list-unstyled">
                     </ul>
@@ -74,11 +76,30 @@
                         $('#search-results-list').empty();
                         $.each(response, function(key, value) {
                             var result_item = $('<li>').append(
-                                $('<h3>').append(
-                                    $('<a>', {
-                                        href: value,
-                                        text: key
-                                    })
+                                $('<div>', {
+                                    class: 'card mt-2'
+                                }).append(
+                                    $('<div>', {
+                                        class: 'card-header'
+                                    }).append(
+                                        $('<h3>', {
+                                            class: 'card-title m-0'
+                                        }).append(
+                                            $('<a>', {
+                                                href: value.url,
+                                                text: key
+                                            })
+                                        )
+                                    ),
+                                    $('<div>', {
+                                        class: 'card-body'
+                                    }).append(
+                                        $('<p>', {
+                                            class: 'card-text text-truncate',
+                                            text: value.readme,
+                                            style: 'max-height: 3.6em; overflow: hidden;'
+                                        })
+                                    )
                                 )
                             );
                             $('#search-results-list').append(result_item);
@@ -89,5 +110,6 @@
             });
         });
     </script>
+        
 </body>
 </html>
