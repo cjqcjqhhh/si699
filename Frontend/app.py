@@ -8,7 +8,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-# 模拟一个简单的用户数据库
 users = {
     'user1': {'password': 'password1'},
     'user2': {'password': 'password2'}
